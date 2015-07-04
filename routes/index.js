@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var register = require('./routes/register');
+var register = require('../routes/register');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

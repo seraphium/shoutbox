@@ -8,8 +8,8 @@
     <% include menu %>
     <h1><% title %></h1>
     <p> Fill the table below to register</p>
-    <% include message %>
-    <form action="/register" method="post">
+
+    <form action="/register" method="post" enctype="multipart/form-data">
         <p>
             <input type="text" name="user[name]" placeholder="Username"/>
         </p>

@@ -9,8 +9,8 @@ exports.form = function(req, res) {
 };
 
 exports.submit = function(req, res) {
- var data = req.body.user;
-  User.getByName(data.name, function(err, user) {
+    var data = req.body.user;
+    User.getByName(data.name, function(err, user) {
     if (err) return next(err);
     //redis will default it
     if (user.id) {
@@ -21,7 +21,7 @@ exports.submit = function(req, res) {
     {
       user = new User ({
         name: data.name,
-        pass: data.pass
+        pass: data.password
       });
     }
     user.save(function(err) {

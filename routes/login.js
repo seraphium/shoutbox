@@ -14,7 +14,7 @@ exports.submit = function(req, res, next) {
         if (err) return next(err);
         if (user) {
          req.session.uid = user.id;
-            req.redirect("/");
+            res.redirect('/');
         }
         else
         {

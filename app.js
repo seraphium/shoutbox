@@ -7,10 +7,12 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var session = require('express-session');
 var routes = require('./routes/index');
-var users = require('./routes/users');
+//var users = require('./routes/users');
 
 var messages = require('./lib/messages');
 var app = express();
+
+var user = require('./lib/middleware/user');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,10 +29,11 @@ app.use(session({
 secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false}));
-app.use(messages);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(user);
+app.use(messages);
 app.use('/', routes);
-app.use('/users', users);
+//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

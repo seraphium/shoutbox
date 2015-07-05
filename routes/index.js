@@ -19,6 +19,8 @@ router.post('/register', multipartMiddleware,register.submit);
 /* GET/POST login page*/
 router.get('/login', login.form);
 router.post('/login',  multipartMiddleware,login.submit);
-router.post('/logout', login.logout);
+
+/* LOGOUT */
+router.get('/logout', login.logout);
 
 module.exports = router;

@@ -23,12 +23,13 @@ exports.submit = function(req, res) {
         name: data.name,
         pass: data.password
       });
+        user.save(function(err) {
+            if (err) return next(err);
+            req.session.uid = user.id;
+            res.redirect('/');
+        });
     }
-    user.save(function(err) {
-      if (err) return next(err);
-      req.session.uid = user.id;
-      res.redirect('/');
-    });
+
   });
 
 };

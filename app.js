@@ -26,8 +26,7 @@ app.use(methodOverride());
 app.use(session({
 secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }}));
+    saveUninitialized: false}));
 app.use(messages);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);

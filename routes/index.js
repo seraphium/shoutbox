@@ -7,10 +7,12 @@ var multipartMiddleware = multipart();
 
 var login = require('../routes/login');
 
+var entries = require('../routes/entries');
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/',entries.list);
+router.get('/post', entries.form);
+router.post('/post', multipartMiddleware,entries.submit);
 
 /* GET/POST register page*/
 router.get('/register', register.form);

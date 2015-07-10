@@ -11,8 +11,12 @@ var entries = require('../routes/entries');
 
 var validate = require('../lib/middleware/validate');
 
+var page = require('../lib/middleware/page');
+
+var Entry = require('../lib/entry');
+
 /* GET home page. */
-router.get('/',entries.list);
+router.get('/:page?',page(Entry.count, 5), entries.list);
 router.get('/post', entries.form);
 router.post('/post', multipartMiddleware, validate.required('entry[title]'),
                     validate.lengthAbove('entry[title]', 4), entries.submit);

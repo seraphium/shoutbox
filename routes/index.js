@@ -9,10 +9,13 @@ var login = require('../routes/login');
 
 var entries = require('../routes/entries');
 
+var validate = require('../lib/middleware/validate');
+
 /* GET home page. */
 router.get('/',entries.list);
 router.get('/post', entries.form);
-router.post('/post', multipartMiddleware,entries.submit);
+router.post('/post', multipartMiddleware, validate.required('entry[title]'),
+                    validate.lengthAbove('entry[title]', 4), entries.submit);
 
 /* GET/POST register page*/
 router.get('/register', register.form);

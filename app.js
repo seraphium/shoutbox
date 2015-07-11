@@ -9,10 +9,14 @@ var session = require('express-session');
 var routes = require('./routes/index');
 //var users = require('./routes/users');
 
+var api = require('./routes/api');
+
 var messages = require('./lib/messages');
 var app = express();
 
 var user = require('./lib/middleware/user');
+
+var errorhandler = require('./lib/middleware/errorhandler');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,10 +34,15 @@ secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false}));
 app.use(express.static(path.join(__dirname, 'public')));
+
+/* RESTFul API*/
+app.use('/api', api.auth);
+
 app.use(user);
 app.use(messages);
 app.use('/', routes);
-//app.use('/users', users);
+app.use(errorhandler.notfound);
+app.use(errorhandler.error);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

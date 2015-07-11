@@ -31,6 +31,16 @@ exports.submit = function(req, res) {
     });
     entry.save(function(err) {
         if (err) return next(err);
-        res.redirect('/');
+        if (req.remoteUser)
+        {
+            res.json({
+                message: "entry added"
+            });
+        }
+        else
+        {
+            res.redirect('/');
+        }
+
     })
 };

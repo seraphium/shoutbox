@@ -17,8 +17,7 @@ var Entry = require('../lib/entry');
 
 var api = require('./api');
 
-/* GET home page. */
-router.get('/:page?',page(Entry.count, 5), entries.list);
+
 router.get('/post', entries.form);
 router.post('/post', multipartMiddleware, validate.required('entry[title]'),
                     validate.lengthAbove('entry[title]', 4), entries.submit);
@@ -46,5 +45,8 @@ if (process.env.ERROR_ROUTE) {
         return next(error);
     });
 }
+
+/* GET home page. */
+router.get('/:page?',page(Entry.count, 5), entries.list);
 
 module.exports = router;
